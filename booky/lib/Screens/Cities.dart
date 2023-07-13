@@ -2,21 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../Controllers/ViewController/ViewController.dart';
+import '../Widgets/frquent_used_widgets/CustText.dart';
 import '../Widgets/frquent_used_widgets/HeadLine.dart';
 import '../Widgets/HomePage/PlaygroundCard.dart';
 import '../Widgets/frquent_used_widgets/backArrowIOS.dart';
 
 class Cities extends StatelessWidget {
-  Cities({Key? key, required this.screenHeight, required this.screenWidth, required this.towns});
+  Cities(
+      {Key? key,
+      required this.screenHeight,
+      required this.screenWidth,
+      required this.towns});
 
   final double screenHeight;
   final double screenWidth;
   final List<Widget> towns;
+
   //
 
   ViewController viewController = Get.find<ViewController>();
-
-
 
   List<Widget> setPGRow(List<Widget> pGroundCards) {
     List<Widget> pRows = [];
@@ -52,6 +56,7 @@ class Cities extends StatelessWidget {
     }
     return pRows;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +102,19 @@ class Cities extends StatelessWidget {
                         width: viewController.getPortrait(
                             screenWidth / 1.1, screenWidth / 1.1),
                         child: ListView(
-                          children: setPGRow(towns),
+                          children: towns.length == 0
+                              ? [
+                                  Center(
+                                    child: CustText(
+                                      text: "لا توجد مدن متاحة الان",
+                                      fontSize: viewController.getPortrait(
+                                        screenWidth / 25,
+                                        screenWidth / 3,
+                                      ),
+                                    ),
+                                  )
+                                ]
+                              : setPGRow(towns),
                         ),
                       )
                     ],

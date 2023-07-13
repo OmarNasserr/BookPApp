@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../Controllers/ConentManagSysControllers/homepageControllers/SliderImageController.dart';
+import '../Controllers/UI_Controllers/AlertsAndLoadingControllers.dart';
 import '../Controllers/ViewController/ViewController.dart';
 import '../Widgets/Policy.dart';
 import '../Widgets/SignIn-Up/SignInInputForm.dart';
@@ -47,6 +48,11 @@ class SignIn extends StatelessWidget {
                       Get.context!.loaderOverlay.show();
                       await Get.find<SliderImageController>().fetchSliderImages();
                       Get.context!.loaderOverlay.hide();
+                      //this is toggled here to make the loading widget appear once the app is redirected to the homepage
+                      //if we put the toggle inside the fetch function which is called in the init of the controller
+                      //it will appear after the controller is init which makes it lags for less than a sec
+                      //but like this no lag
+                      Get.find<AlertsAndLoadingControllers>().toggleNearestPlaygroundLoading();
                       Get.to(()=>HomePage());
 
                     }

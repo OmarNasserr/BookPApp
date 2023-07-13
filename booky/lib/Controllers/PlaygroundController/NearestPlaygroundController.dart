@@ -36,7 +36,7 @@ class NearestPlaygroundsController extends GetxController {
       String location = '29,31',
       int distance = 5}) async {
     var a = Get.put(AlertsAndLoadingControllers());
-    Get.find<AlertsAndLoadingControllers>().toggleNearestPlaygroundLoading();
+    // Get.find<AlertsAndLoadingControllers>().toggleNearestPlaygroundLoading();
     var nearestPlaygrounds =
         await NearestPlaygroundsRemoteService.fetchNearestPlaygrounds(
             pageNumber: pageNumber,

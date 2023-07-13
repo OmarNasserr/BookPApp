@@ -1,3 +1,4 @@
+import 'package:booky/Widgets/frquent_used_widgets/CustText.dart';
 import 'package:booky/Widgets/frquent_used_widgets/HeadLine.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,11 +11,16 @@ import '../Widgets/frquent_used_widgets/backArrowIOS.dart';
 
 class NearestPGrounds extends StatelessWidget {
   NearestPGrounds(
-      {Key? key, required this.screenHeight, required this.screenWidth, required this.playgrounds});
+      {Key? key,
+      required this.screenHeight,
+      required this.screenWidth,
+      required this.playgrounds});
+
 //
   final double screenHeight;
   final double screenWidth;
   final List<Widget> playgrounds;
+
   //
   ViewController viewController = Get.find<ViewController>();
 
@@ -63,11 +69,23 @@ class NearestPGrounds extends StatelessWidget {
                         width: viewController.getPortrait(
                             screenWidth / 1.1, screenWidth / 1.1),
                         child: ListView(
-                          children: CardUIBuilderController.setPlaygroundsRows(
-                              playgrounds,
-                              viewController,
-                              screenHeight,
-                              screenWidth),
+                          children: playgrounds.length == 0
+                              ? [
+                                  Center(
+                                    child: CustText(
+                                      text: "لا توجد ملاعب في هذا النطاق",
+                                      fontSize: viewController.getPortrait(
+                                        screenWidth / 25,
+                                        screenWidth / 3,
+                                      ),
+                                    ),
+                                  )
+                                ]
+                              : CardUIBuilderController.setPlaygroundsRows(
+                                  playgrounds,
+                                  viewController,
+                                  screenHeight,
+                                  screenWidth),
                         ),
                       ),
                     ],
