@@ -8,7 +8,9 @@ import 'package:booky/Widgets/frquent_used_widgets/GreenBanner.dart';
 import 'package:booky/Widgets/SignUp-In%20Button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
+import '../Controllers/ConentManagSysControllers/homepageControllers/SliderImageController.dart';
 import '../Controllers/ViewController/ViewController.dart';
 import '../Widgets/Policy.dart';
 import '../Widgets/SignIn-Up/SignInInputForm.dart';
@@ -21,9 +23,6 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery
-        .of(context)
-        .size;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -34,7 +33,6 @@ class SignIn extends StatelessWidget {
             Future.delayed(Duration.zero, () async {
               viewController.setPortrait(context);
             });
-            viewController.setPortrait(context);
             return Column(
               children: [
                 GreenBanner(
@@ -43,10 +41,14 @@ class SignIn extends StatelessWidget {
                 SignInInputForm(
                   formKey: _key, screenWidth: screenWidth, screenHeight: screenHeight,),
                 MaterialButton(
-                  onPressed: () {
+                  onPressed: () async{
                     if (_key.currentState!.validate()) {
                       _key.currentState?.save();
+                      Get.context!.loaderOverlay.show();
+                      await Get.find<SliderImageController>().fetchSliderImages();
+                      Get.context!.loaderOverlay.hide();
                       Get.to(()=>HomePage());
+
                     }
                   },
                   height: screenHeight/21.98,

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:booky/Constant/serverURI.dart';
 import 'package:booky/Controllers/ViewController/ViewController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -14,7 +15,12 @@ class CardUIBuilderController {
   static List<Widget> getPlaygrounds(RxList<PlaygroundResponse> nPlaygrounds,
       double screenHeight, double screenWidth,{bool showAll=false}) {
     List<Widget> playgrounds = [];
-    int loopCounter=showAll?nPlaygrounds.length:4;
+    int loopCounter=0;
+    if (nPlaygrounds.length>=4){
+      loopCounter=4;
+    }else{
+      loopCounter=nPlaygrounds.length;
+    }
     for (int i = 0; i < loopCounter; i++) {
       if (!showAll && nPlaygrounds.length < i+1) {
         break;
@@ -23,7 +29,7 @@ class CardUIBuilderController {
           screenHeight: screenHeight,
           screenWidth: screenWidth,
           pName: nPlaygrounds[i].pName,
-          imgThumbnail: nPlaygrounds[i].images[0].image.toString(),
+          imgThumbnail: nPlaygrounds[i].images.isEmpty?'${ServerURI.uri}/media/static/errPlayground.jpg':nPlaygrounds[i].images[0].image.toString(),
           hourRate: nPlaygrounds[i].pricePerHour,
           id: nPlaygrounds[i].id,
         ));

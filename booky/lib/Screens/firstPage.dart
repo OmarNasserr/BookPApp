@@ -1,4 +1,3 @@
-
 import 'package:booky/Screens/SignIn.dart';
 import 'package:booky/Widgets/SignUp-In%20Button.dart';
 import 'package:booky/Widgets/frquent_used_widgets/CustText.dart';
@@ -23,7 +22,9 @@ class FirstPage extends StatelessWidget {
           child: LayoutBuilder(builder: (context, constraints) {
             double screenHeight = constraints.maxHeight;
             double screenWidth = constraints.maxWidth;
-            Get.find<ViewController>().setPortrait(context);
+            Future.delayed(Duration.zero, () async {
+              Get.find<ViewController>().setPortrait(context);
+            });
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -35,27 +36,25 @@ class FirstPage extends StatelessWidget {
                     height: screenHeight / 30,
                   ),
                   Container(
-                    width:  screenWidth,
-                    height:screenHeight / 4.5,
+                    width: screenWidth,
+                    height: screenHeight / 4.5,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Center(
                           child: CustText(
-                            text:"مرحبا بك في تــرتـان",
-
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize:screenWidth / 15,
+                            text: "مرحبا بك في تــرتـان",
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: screenWidth / 15,
                           ),
                         ),
                         Center(
                           child: CustText(
-                            text:"اول تطبيق حجز ملاعب في مصر",
-                                color: Colors.white,
-                                fontSize:screenWidth / 20,
-                                fontWeight: FontWeight.bold
-                          ),
+                              text: "اول تطبيق حجز ملاعب في مصر",
+                              color: Colors.white,
+                              fontSize: screenWidth / 20,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -78,7 +77,7 @@ class FirstPage extends StatelessWidget {
                     },
                   ),
                   SizedBox(
-                    height:screenHeight / 50,
+                    height: screenHeight / 50,
                   ),
                   Button(
                     width: Get.find<ViewController>().portrait.value

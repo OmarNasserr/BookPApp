@@ -1,3 +1,3 @@
 class ServerURI{
-    static String uri="https://aafd-156-215-195-8.eu.ngrok.io";
+    static String uri="https://d6be-154-176-251-183.ngrok-free.app";
 }

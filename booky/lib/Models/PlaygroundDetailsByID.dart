@@ -49,7 +49,7 @@ class PlaygroundDetailsById {
     city: json["city"],
     playgroundOwner: json["playground_owner"],
     images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
-    hoursAvaialble: List<String>.from(json["hours_avaialble"].map((x) => x)),
+    hoursAvaialble: List<String>.from(json["hours_available"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
@@ -64,7 +64,7 @@ class PlaygroundDetailsById {
     "city": city,
     "playground_owner": playgroundOwner,
     "images": List<dynamic>.from(images.map((x) => x.toJson())),
-    "hours_avaialble": List<dynamic>.from(hoursAvaialble.map((x) => x)),
+    "hours_available": List<dynamic>.from(hoursAvaialble.map((x) => x)),
   };
 }
 

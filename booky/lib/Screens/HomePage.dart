@@ -1,3 +1,4 @@
+import 'package:booky/Controllers/ConentManagSysControllers/homepageControllers/SliderImageController.dart';
 import 'package:booky/Controllers/LocationControllers/CitiesController.dart';
 import 'package:booky/Controllers/UI_Controllers/AlertsAndLoadingControllers.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,13 @@ import '../Widgets/HomePage/SearchBar.dart';
 import '../Widgets/HomePage/SectionListView.dart';
 
 class HomePage extends StatelessWidget {
-
   var b = Get.put(NearestPlaygroundsController());
   var c = Get.put(CitiesController());
   ViewController viewController = Get.find<ViewController>();
   NearestPlaygroundsController nearestPlaygroundsController =
       Get.find<NearestPlaygroundsController>();
   CitiesController citiesController = Get.find<CitiesController>();
+  SliderImageController sliderImageController=Get.find<SliderImageController>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +56,16 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     width: screenWidth,
                     child: Center(
-                      child: ImageSlider(
-                        screenHeight: viewController.getPortrait(
-                            screenHeight, screenWidth / 1.2),
-                        screenWidth: viewController.getPortrait(
-                            screenWidth, screenWidth / 1.4),
-                        // ignore: prefer_const_literals_to_create_immutables
-                        images: [
-                          "http://8e7b-156-215-115-20.eu.ngrok.io/media/playground/Helwan/%D9%85%D8%B1%D9%83%D8%B2%20%D8%B4%D8%A8%D8%A7%D8%A8%202/1_FwTZRM0TQmpuUraRys_rFA_-_Copy.jpg",
-                          "http://8e7b-156-215-115-20.eu.ngrok.io/media/playground/Helwan/%D9%85%D8%B1%D9%83%D8%B2%20%D8%B4%D8%A8%D8%A7%D8%A8%202/1_FwTZRM0TQmpuUraRys_rFA_-_Copy.jpg",
-                          "http://8e7b-156-215-115-20.eu.ngrok.io/media/playground/Helwan/%D9%85%D8%B1%D9%83%D8%B2%20%D8%B4%D8%A8%D8%A7%D8%A8%202/1_FwTZRM0TQmpuUraRys_rFA_-_Copy.jpg",
-                        ],
+                      child: Obx(
+                        () => ImageSlider(
+                          screenHeight: viewController.getPortrait(
+                              screenHeight, screenWidth / 1.2),
+                          screenWidth: viewController.getPortrait(
+                              screenWidth, screenWidth / 1.4),
+                          // ignore: prefer_const_literals_to_create_immutables
+                          images: sliderImageController
+                                  .getSliderImagesController()??['']
+                        ),
                       ),
                     ),
                   ),

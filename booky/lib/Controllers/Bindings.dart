@@ -1,4 +1,5 @@
 
+import 'package:booky/Controllers/ConentManagSysControllers/homepageControllers/SliderImageController.dart';
 import 'package:get/get.dart';
 
 import 'GeoLocationControllers/GeoLocationAPIs.dart';
@@ -22,6 +23,7 @@ class AllControllerBindings implements Bindings {
     Get.lazyPut<AlertsAndLoadingControllers>(() => AlertsAndLoadingControllers(), fenix: true);
     Get.lazyPut<PlaygroundDetailsController>(() => PlaygroundDetailsController(), fenix: true);
     Get.lazyPut<FilterPlaygroundsController>(() => FilterPlaygroundsController(), fenix: true);
+    Get.lazyPut<SliderImageController>(() => SliderImageController(), fenix: true);
   }
 }
 

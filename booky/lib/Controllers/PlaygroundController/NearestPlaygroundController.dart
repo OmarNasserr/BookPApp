@@ -44,6 +44,7 @@ class NearestPlaygroundsController extends GetxController {
             location: location,
             distance: distance);
     Get.find<AlertsAndLoadingControllers>().toggleNearestPlaygroundLoading();
+    print("NEAREST PA ${nearestPlaygrounds}");
     if (nearestPlaygrounds != null) {
       setNearestPlaygroundController(nearestPlaygrounds);
     }

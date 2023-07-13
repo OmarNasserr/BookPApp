@@ -36,14 +36,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   flutter_image_slideshow: ^0.1.2
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.0
   searchbar_animation: ^0.0.2
   calender_picker: ^1.0.7
   geolocator: ^9.0.1
   coverflow: ^2.0.3
-  fancy_shimmer_image: ^2.0.2
-  loader_overlay: ^2.1.0
-  flutter_spinkit: ^5.1.0
+  flutter_cache_manager: ^3.3.0
+  cached_network_image: ^3.2.3
+  fancy_shimmer_image: ^2.0.3
+  loader_overlay: ^2.2.0
+  flutter_spinkit: ^5.2.0
 
 dev_dependencies:
   flutter_test:

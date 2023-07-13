@@ -4,6 +4,7 @@ import 'package:booky/Constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
+import '../../Models/content_manag_sys/homepage/slider_images.dart';
 import 'ImgFromUrlWithShimmer.dart';
 
 class ImageSlider extends StatelessWidget {
@@ -29,6 +30,12 @@ class ImageSlider extends StatelessWidget {
       );
       slider.add(image);
     }
+    // if(slider.isEmpty){
+    //   slider.add(FittedBox(
+    //     child: ImgFromNetwork(imgUrl: '', boxFit: BoxFit.fill,),
+    //     fit: BoxFit.fill,
+    //   ));
+    // }
     return slider;
   }
 
