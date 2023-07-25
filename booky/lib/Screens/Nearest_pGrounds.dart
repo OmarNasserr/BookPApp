@@ -73,7 +73,7 @@ class NearestPGrounds extends StatelessWidget {
                               ? [
                                   Center(
                                     child: CustText(
-                                      text: "لا توجد ملاعب في هذا النطاق",
+                                      text: "لا توجد ملاعب في هذا النطاق\n       برجاء توسيع النطاق",
                                       fontSize: viewController.getPortrait(
                                         screenWidth / 25,
                                         screenWidth / 3,

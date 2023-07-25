@@ -70,7 +70,7 @@ class SectionListView extends StatelessWidget {
                             child: Center(
                               child: CustText(
                                 text:
-                                    "لا توجد ملاعب في هذا النطاق\nاضغط على اعرض المزيد و وسع النطاق",
+                                    "لا توجد ملاعب في هذا النطاق\n       برجاء توسيع النطاق",
                                 fontSize: viewController.getPortrait(
                                   screenWidth / 25,
                                   screenWidth / 3,
