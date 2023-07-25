@@ -26,7 +26,6 @@ class PlaygroundDetailsByIdRemoteService {
       Map responseMap = json.decode(response);
       if (responseMap['status'] == 200) {
         var data = jsonEncode(responseMap);
-        debugPrint("data $data");
         Get.context!.loaderOverlay.hide();
         return playgroundDetailsByIdFromJson(data);
       }

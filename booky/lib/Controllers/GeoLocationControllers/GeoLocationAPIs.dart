@@ -45,7 +45,6 @@ class GeoLocationAPIs extends GetxController {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     geoLocationDetails.currentLocation = await Geolocator.getCurrentPosition();
-    debugPrint("Current Location ${geoLocationDetails.currentLocation}");
     return geoLocationDetails.currentLocation;
   }
 
@@ -57,8 +56,6 @@ class GeoLocationAPIs extends GetxController {
       double lat1, double long1, double lat2, double long2) {
     geoLocationDetails.distanceBet2Locations =
         Geolocator.distanceBetween(lat1, long1, lat2, long2) / 1000;
-    debugPrint(
-        "distance bet 2 locations ${geoLocationDetails.distanceBet2Locations}");
     return geoLocationDetails.distanceBet2Locations;
   }
 }

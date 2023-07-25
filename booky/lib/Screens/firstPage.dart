@@ -88,8 +88,7 @@ class FirstPage extends StatelessWidget {
                         : screenWidth,
                     text: "الاشتــراك",
                     onPressed: () {
-                      debugPrint("height $screenHeight");
-                      debugPrint("width $screenWidth");
+
                     },
                   ),
                 ],

@@ -37,16 +37,18 @@ class PlaygroundDetailsController extends GetxController {
   // }
 
   Future<void> fetchPlaygroundDetails(
-      {required String date, required String id,required bool overlayLoading}) async {
+      {required String date,
+      required String id,
+      required bool overlayLoading}) async {
     var a = Get.put(AlertsAndLoadingControllers());
     Get.find<AlertsAndLoadingControllers>().togglePlaygroundDetailsLoading();
     var playgroundDetails =
         await PlaygroundDetailsByIdRemoteService.fetchPlaygroundDetailsByID(
-            date: date, id: id,overlayLoading: overlayLoading);
+            date: date, id: id, overlayLoading: overlayLoading);
     Get.find<AlertsAndLoadingControllers>().togglePlaygroundDetailsLoading();
     if (playgroundDetails != null) {
       setPlaygroundDetailsController(playgroundDetails);
-    }else{
+    } else {
       debugPrint("FETCH PLAYGROUND DETAILS BY ID RETURNED A NULL VALUE");
     }
   }

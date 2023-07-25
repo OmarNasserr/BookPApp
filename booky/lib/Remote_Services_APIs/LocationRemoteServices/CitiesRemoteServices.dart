@@ -22,7 +22,6 @@ class CitiesRemoteService {
       http.StreamedResponse streamedResponse = await request.send();
       var response1 = await http.Response.fromStream(streamedResponse);
       var response= utf8.decode(response1.bodyBytes);
-      debugPrint("response $response");
       Map responseMap=json.decode(response);
       if (responseMap['status'] == 200) {
         var data = jsonEncode(responseMap['results']);

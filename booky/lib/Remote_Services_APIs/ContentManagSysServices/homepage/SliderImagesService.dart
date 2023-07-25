@@ -22,9 +22,7 @@ class SliderImageRemoteService {
       Map responseMap = json.decode(response);
       if (responseMap['status'] == 200) {
         var data = jsonEncode(responseMap);
-        debugPrint("data $data");
         Get.context!.loaderOverlay.hide();
-        print("SLIDER FROM JSON ${sliderImageFromJson(data).getImageUrls()}");
         return sliderImageFromJson(data).getImageUrls().map((url) => url.toString()).toList();
       }
     } on Exception catch (e) {

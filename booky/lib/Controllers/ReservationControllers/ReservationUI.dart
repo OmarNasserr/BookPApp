@@ -15,14 +15,12 @@ class ReservationUI extends GetxController {
     Get.find<ReservationUI>().totalPay =
         Get.find<ReservationUI>().totalPay + hourRate;
     Get.find<ReservationUI>().totalPay.refresh();
-    debugPrint("toalPay ${Get.find<ReservationUI>().totalPay}");
   }
 
   void decTotalPay(double hourRate) {
     Get.find<ReservationUI>().totalPay =
         Get.find<ReservationUI>().totalPay - hourRate;
     Get.find<ReservationUI>().totalPay.refresh();
-    debugPrint("toalPay ${Get.find<ReservationUI>().totalPay}");
   }
 
   void restartTotalPayToZero(){
@@ -33,7 +31,6 @@ class ReservationUI extends GetxController {
   List<Widget> setAvailableTimes(double screenHeight, double screenWidth,
       List<String> availableHoursPassed,ViewController viewController,double hourRate) {
     List<Widget> availableTimes = [];
-    log("$availableHoursPassed");
     for (int i = 0; i < availableHoursPassed.length; i++) {
       availableTimes.add(
         AvailableTimes(

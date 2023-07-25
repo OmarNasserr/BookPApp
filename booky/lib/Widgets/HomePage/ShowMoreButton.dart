@@ -23,7 +23,6 @@ class ShowMoreButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: () {
-        debugPrint('pgT $playgroundsOrTowns');
         pGround
             ? Get.to(() => NearestPGrounds(
                   screenWidth: screenWidth,
