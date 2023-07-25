@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:booky/Constant/colors.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import '../../Models/content_manag_sys/homepage/slider_images.dart';
+import 'CustText.dart';
 import 'ImgFromUrlWithShimmer.dart';
 
 class ImageSlider extends StatelessWidget {
@@ -22,6 +24,7 @@ class ImageSlider extends StatelessWidget {
   List<Widget> slider = [];
 
   List<Widget> fillSlider() {
+    print("IMG LEN ${images.length}");
     for (int i = 0; i < images.length; i++) {
       Widget image;
       image = FittedBox(
@@ -30,18 +33,12 @@ class ImageSlider extends StatelessWidget {
       );
       slider.add(image);
     }
-    // if(slider.isEmpty){
-    //   slider.add(FittedBox(
-    //     child: ImgFromNetwork(imgUrl: '', boxFit: BoxFit.fill,),
-    //     fit: BoxFit.fill,
-    //   ));
-    // }
     return slider;
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return images.isNotEmpty?SizedBox(
       height: screenHeight / 4,
       width: screenWidth,
       child: ClipRRect(
@@ -53,8 +50,9 @@ class ImageSlider extends StatelessWidget {
           autoPlayInterval: 5000,
           indicatorColor: secondaryColor,
           children: fillSlider(),
-        ),
+        )
+            // :Center(child: CustText(text: 'يرجى التحقق من الاتصال', fontSize: screenWidth/15,)),
       ),
-    );
+    ):Container();
   }
 }

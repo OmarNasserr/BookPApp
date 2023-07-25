@@ -1,8 +1,14 @@
+import 'dart:developer';
+
+import 'package:booky/Constant/colors.dart';
 import 'package:booky/Controllers/ConentManagSysControllers/homepageControllers/SliderImageController.dart';
 import 'package:booky/Controllers/LocationControllers/CitiesController.dart';
 import 'package:booky/Controllers/UI_Controllers/AlertsAndLoadingControllers.dart';
+import 'package:booky/Widgets/frquent_used_widgets/CustText.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../Controllers/GeoLocationControllers/GeoLocationAPIs.dart';
 import '../Controllers/PlaygroundController/NearestPlaygroundController.dart';
 import '../Controllers/ViewController/ViewController.dart';
 import '../Widgets/frquent_used_widgets/ImageSlider.dart';
@@ -16,10 +22,14 @@ class HomePage extends StatelessWidget {
   NearestPlaygroundsController nearestPlaygroundsController =
       Get.find<NearestPlaygroundsController>();
   CitiesController citiesController = Get.find<CitiesController>();
-  SliderImageController sliderImageController=Get.find<SliderImageController>();
+  SliderImageController sliderImageController =
+      Get.find<SliderImageController>();
+
+  double range = 0;
 
   @override
   Widget build(BuildContext context) {
+    log("HOME");
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -57,21 +67,79 @@ class HomePage extends StatelessWidget {
                     width: screenWidth,
                     child: Center(
                       child: Obx(
-                        () => ImageSlider(
-                          screenHeight: viewController.getPortrait(
-                              screenHeight, screenWidth / 1.2),
-                          screenWidth: viewController.getPortrait(
-                              screenWidth, screenWidth / 1.4),
-                          // ignore: prefer_const_literals_to_create_immutables
-                          images: sliderImageController
-                                  .getSliderImagesController()??['']
-                        ),
+                        () => sliderImageController
+                                    .getSliderImagesController().isEmpty
+                            ? Container()
+                            : ImageSlider(
+                                screenHeight: viewController.getPortrait(
+                                    screenHeight, screenWidth / 1.2),
+                                screenWidth: viewController.getPortrait(
+                                    screenWidth, screenWidth / 1.4),
+                                // ignore: prefer_const_literals_to_create_immutables
+                                images: sliderImageController
+                                            .getSliderImagesController().isEmpty
+                                    ? []
+                                    : sliderImageController
+                                        .getSliderImagesController()),
                       ),
                     ),
                   ),
                   SizedBox(
                     height: viewController.getPortrait(
                         screenHeight / 30, screenWidth / 30),
+                  ),
+                  Container(
+                    height: viewController.getPortrait(
+                        screenHeight / 25, screenWidth / 30),
+                    width: viewController.getPortrait(
+                        screenWidth / 1.1, screenWidth / 1.4),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: viewController.getPortrait(
+                              screenWidth / 1.5, screenWidth / 1.8),
+                          child: Obx(
+                            () => Slider(
+                              value: nearestPlaygroundsController.getDistance(),
+                              onChanged: (double value) {
+                                nearestPlaygroundsController.setDistance(value);
+                              },
+                              onChangeEnd: (double value) async {
+                                nearestPlaygroundsController.setDistance(value);
+                                var location = await Get.find<GeoLocationAPIs>()
+                                    .determinePosition();
+                                var passedLocation =
+                                    "${location.latitude.toString()},${location.longitude.toString()}";
+                                await nearestPlaygroundsController
+                                    .fetchPlaygrounds(
+                                        location: passedLocation,
+                                        distance: nearestPlaygroundsController
+                                            .getDistance()
+                                            .toInt());
+                              },
+                              min: 5,
+                              max: 50,
+                              activeColor: secondaryColor,
+                              // label: "distance",
+                            ),
+                          ),
+                        ),
+                        Obx(
+                          () => Container(
+                            width: viewController.getPortrait(
+                                screenWidth / 4.7, screenWidth / 4.7),
+                            child: Center(
+                              child: CustText(
+                                text:
+                                    '${nearestPlaygroundsController.getDistance().toInt()} KMs',
+                                fontSize: viewController.getPortrait(
+                                    screenWidth / 22, screenWidth / 22),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   SectionListView(
                     viewController: viewController,
