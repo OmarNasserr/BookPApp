@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import '../Controllers/GeoLocationControllers/GeoLocationAPIs.dart';
 import '../Controllers/PlaygroundController/NearestPlaygroundController.dart';
 import '../Controllers/ViewController/ViewController.dart';
+import '../Widgets/HomePage/DistanceSlider.dart';
 import '../Widgets/frquent_used_widgets/ImageSlider.dart';
 import '../Widgets/HomePage/SearchBar.dart';
 import '../Widgets/HomePage/SectionListView.dart';
@@ -67,7 +68,8 @@ class HomePage extends StatelessWidget {
                     child: Center(
                       child: Obx(
                         () => sliderImageController
-                                    .getSliderImagesController().isEmpty
+                                .getSliderImagesController()
+                                .isEmpty
                             ? Container()
                             : ImageSlider(
                                 screenHeight: viewController.getPortrait(
@@ -76,7 +78,8 @@ class HomePage extends StatelessWidget {
                                     screenWidth, screenWidth / 1.4),
                                 // ignore: prefer_const_literals_to_create_immutables
                                 images: sliderImageController
-                                            .getSliderImagesController().isEmpty
+                                        .getSliderImagesController()
+                                        .isEmpty
                                     ? []
                                     : sliderImageController
                                         .getSliderImagesController()),
@@ -87,59 +90,12 @@ class HomePage extends StatelessWidget {
                     height: viewController.getPortrait(
                         screenHeight / 30, screenWidth / 30),
                   ),
-                  Container(
-                    height: viewController.getPortrait(
-                        screenHeight / 25, screenWidth / 30),
-                    width: viewController.getPortrait(
-                        screenWidth / 1.1, screenWidth / 1.4),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: viewController.getPortrait(
-                              screenWidth / 1.5, screenWidth / 1.8),
-                          child: Obx(
-                            () => Slider(
-                              value: nearestPlaygroundsController.getDistance(),
-                              onChanged: (double value) {
-                                nearestPlaygroundsController.setDistance(value);
-                              },
-                              onChangeEnd: (double value) async {
-                                nearestPlaygroundsController.setDistance(value);
-                                var location = await Get.find<GeoLocationAPIs>()
-                                    .determinePosition();
-                                var passedLocation =
-                                    "${location.latitude.toString()},${location.longitude.toString()}";
-                                await nearestPlaygroundsController
-                                    .fetchPlaygrounds(
-                                        location: passedLocation,
-                                        distance: nearestPlaygroundsController
-                                            .getDistance()
-                                            .toInt());
-                              },
-                              min: 5,
-                              max: 50,
-                              activeColor: secondaryColor,
-                              // label: "distance",
-                            ),
-                          ),
-                        ),
-                        Obx(
-                          () => Container(
-                            width: viewController.getPortrait(
-                                screenWidth / 4.7, screenWidth / 4.7),
-                            child: Center(
-                              child: CustText(
-                                text:
-                                    '${nearestPlaygroundsController.getDistance().toInt()} KMs',
-                                fontSize: viewController.getPortrait(
-                                    screenWidth / 22, screenWidth / 22),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  DistanceSlider(
+                      viewController: viewController,
+                      screenHeight: screenHeight,
+                      screenWidth: screenWidth,
+                      nearestPlaygroundsController:
+                          nearestPlaygroundsController),
                   SectionListView(
                     viewController: viewController,
                     screenHeight: screenHeight,
@@ -181,3 +137,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
