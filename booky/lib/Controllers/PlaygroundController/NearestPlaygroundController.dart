@@ -9,6 +9,7 @@ import '../UI_Controllers/AlertsAndLoadingControllers.dart';
 
 class NearestPlaygroundsController extends GetxController {
   var nearestPlaygroundController = <PlaygroundResponse>[].obs;
+  RxDouble distance = 5.0.obs;
 
   void setNearestPlaygroundController(
       List<PlaygroundResponse> nearestPlaygrounds) {
@@ -20,11 +21,19 @@ class NearestPlaygroundsController extends GetxController {
     return nearestPlaygroundController;
   }
 
+  void setDistance(double distanceParam){
+    distance.value=distanceParam;
+    distance.refresh();
+  }
+
+  double getDistance(){
+    return distance.value;
+  }
+
   @override
   void onInit() async {
     var a = Get.put(GeoLocationAPIs());
     var location=await Get.find<GeoLocationAPIs>().determinePosition();
-    debugPrint(location.toString());
     var passedLocation="${location.latitude.toString()},${location.longitude.toString()}" ;
     await fetchPlaygrounds(location: passedLocation,distance: 18);
     super.onInit();
@@ -36,7 +45,9 @@ class NearestPlaygroundsController extends GetxController {
       String location = '29,31',
       int distance = 5}) async {
     var a = Get.put(AlertsAndLoadingControllers());
-    // Get.find<AlertsAndLoadingControllers>().toggleNearestPlaygroundLoading();
+    if (!Get.find<AlertsAndLoadingControllers>().getNearestPlaygroundLoading()) {
+      Get.find<AlertsAndLoadingControllers>().toggleNearestPlaygroundLoading();
+    }
     var nearestPlaygrounds =
         await NearestPlaygroundsRemoteService.fetchNearestPlaygrounds(
             pageNumber: pageNumber,
@@ -44,7 +55,6 @@ class NearestPlaygroundsController extends GetxController {
             location: location,
             distance: distance);
     Get.find<AlertsAndLoadingControllers>().toggleNearestPlaygroundLoading();
-    print("NEAREST PA ${nearestPlaygrounds}");
     if (nearestPlaygrounds != null) {
       setNearestPlaygroundController(nearestPlaygrounds);
     }
