@@ -9,7 +9,7 @@ import '../../Models/content_manag_sys/homepage/slider_images.dart';
 import 'CustText.dart';
 import 'ImgFromUrlWithShimmer.dart';
 
-class ImageSlider extends StatelessWidget {
+class ImageSlider extends StatefulWidget {
   ImageSlider(
       {Key? key,
       required this.screenHeight,
@@ -21,14 +21,18 @@ class ImageSlider extends StatelessWidget {
 
   final List<String> images;
 
+  @override
+  State<ImageSlider> createState() => _ImageSliderState();
+}
+
+class _ImageSliderState extends State<ImageSlider> {
   List<Widget> slider = [];
 
   List<Widget> fillSlider() {
-    print("IMG LEN ${images.length}");
-    for (int i = 0; i < images.length; i++) {
+    for (int i = 0; i < widget.images.length; i++) {
       Widget image;
       image = FittedBox(
-        child: ImgFromNetwork(imgUrl: images[i], boxFit: BoxFit.fill,),
+        child: ImgFromNetwork(imgUrl: widget.images[i], boxFit: BoxFit.fill,),
         fit: BoxFit.fill,
       );
       slider.add(image);
@@ -37,19 +41,28 @@ class ImageSlider extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+    /// I call this function in the initState to optimize performance, as I declared children of the slider with
+    /// fillSlider() directly the function will be called in each build, but this way the function will be only called once
+    /// and its value will be saved in the slider list for the future build.
+    fillSlider();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return images.isNotEmpty?SizedBox(
-      height: screenHeight / 4,
-      width: screenWidth,
+    return widget.images.isNotEmpty?SizedBox(
+      height: widget.screenHeight / 4,
+      width: widget.screenWidth,
       child: ClipRRect(
         borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(screenWidth / 10),
-            bottomLeft: Radius.circular(screenWidth / 10)),
+            bottomRight: Radius.circular(widget.screenWidth / 10),
+            bottomLeft: Radius.circular(widget.screenWidth / 10)),
         child: ImageSlideshow(
           isLoop: true,
           autoPlayInterval: 5000,
           indicatorColor: secondaryColor,
-          children: fillSlider(),
+          children: slider,
         )
             // :Center(child: CustText(text: 'يرجى التحقق من الاتصال', fontSize: screenWidth/15,)),
       ),
