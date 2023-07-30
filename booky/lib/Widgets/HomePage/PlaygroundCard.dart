@@ -78,7 +78,7 @@ class PlaygroundCard extends StatelessWidget {
         child: Container(
           height: viewController.getPortrait(screenHeight / 4, screenWidth / 4),
           width:
-              viewController.getPortrait(screenWidth / 2.5, screenHeight / 2.5),
+              viewController.getPortrait(screenWidth / 1.8, screenHeight / 2.5),
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: Colors.white),
@@ -91,7 +91,7 @@ class PlaygroundCard extends StatelessWidget {
                 height: viewController.getPortrait(
                     screenHeight / 6, screenWidth / 6),
                 width: viewController.getPortrait(
-                    screenWidth / 2, screenHeight / 2),
+                    screenWidth / 1.5, screenHeight / 2),
                 decoration: const BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.only(
