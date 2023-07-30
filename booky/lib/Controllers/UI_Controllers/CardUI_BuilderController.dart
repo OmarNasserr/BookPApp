@@ -44,14 +44,16 @@ class CardUIBuilderController {
       double screenHeight, double screenWidth) {
     List<Widget> playgrounds = [];
     for (CitiesResponse city in cityResponse) {
-      playgrounds.add(PlaygroundCard(
-          city: true,
-          screenHeight: screenHeight,
-          screenWidth: screenWidth,
-          pName: city.cityName,
-          imgThumbnail: '',
-          hourRate: 0,
-          id: city.id));
+      if(city.playgrounds.isNotEmpty) {
+        playgrounds.add(PlaygroundCard(
+            city: true,
+            screenHeight: screenHeight,
+            screenWidth: screenWidth,
+            pName: city.cityName,
+            imgThumbnail: '',
+            hourRate: 0,
+            id: city.id));
+      }
     }
     return playgrounds;
   }
