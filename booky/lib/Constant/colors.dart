@@ -12,3 +12,10 @@ const textFormFieldChangeTextColor=Color(0xFF198146);
 const textFormFieldFocusedBorderColor=Color(0xFF198146);
 const textFormFieldBorderColor=Color(0xFF198146);
 const textFormIconsColor=Color(0xFF198146);
+
+
+
+const sideDrawerTileTextColor=Colors.white;
+const sideDrawerTileCircleColor=Colors.white;
+const sideDrawerTileNotificationColor=Colors.white;
+const sideDrawerTileNotNumColor=Color(0xFF198146);
