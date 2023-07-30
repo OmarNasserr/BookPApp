@@ -27,7 +27,7 @@ class searchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: viewController.getPortrait(screenHeight / 15, screenWidth / 15),
-      width: viewController.getPortrait(screenWidth, screenWidth / 1.4),
+      width: viewController.getPortrait(screenWidth/1.2, screenWidth / 1.4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(viewController.getPortrait(
             screenWidth / 11.25, screenHeight / 10.375)),
@@ -78,7 +78,7 @@ class searchBar extends StatelessWidget {
                 height: viewController.getPortrait(
                     screenHeight / 23, screenWidth / 23),
                 width: viewController.getPortrait(
-                    screenWidth / 1.3, screenWidth / 1.7),
+                    screenWidth / 1.6, screenWidth / 1.7),
                 child: TextField(
                   onChanged: onChanged,
                   onSubmitted: onSubmitted,
