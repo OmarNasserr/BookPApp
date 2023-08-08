@@ -22,7 +22,7 @@ class FirstPage extends StatelessWidget {
           child: LayoutBuilder(builder: (context, constraints) {
             double screenHeight = constraints.maxHeight;
             double screenWidth = constraints.maxWidth;
-            Future.delayed(Duration.zero, () async {
+            WidgetsBinding.instance!.addPostFrameCallback((_)  {
               Get.find<ViewController>().setPortrait(context);
             });
             return SingleChildScrollView(
@@ -41,21 +41,21 @@ class FirstPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Center(
-                          child: CustText(
-                            text: "مرحبا بك في تــرتـان",
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: screenWidth / 15,
-                          ),
-                        ),
-                        Center(
-                          child: CustText(
-                              text: "اول تطبيق حجز ملاعب في مصر",
-                              color: Colors.white,
-                              fontSize: screenWidth / 20,
-                              fontWeight: FontWeight.bold),
-                        ),
+                        // Center(
+                        //   child: CustText(
+                        //     text: "مرحبا بك في تــرتـان",
+                        //     color: Colors.white,
+                        //     fontWeight: FontWeight.bold,
+                        //     fontSize: screenWidth / 15,
+                        //   ),
+                        // ),
+                        // Center(
+                        //   child: CustText(
+                        //       text: "اول تطبيق حجز ملاعب في مصر",
+                        //       color: Colors.white,
+                        //       fontSize: screenWidth / 20,
+                        //       fontWeight: FontWeight.bold),
+                        // ),
                       ],
                     ),
                   ),
