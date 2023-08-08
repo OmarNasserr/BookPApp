@@ -38,7 +38,7 @@ class NearestPGrounds extends StatelessWidget {
             builder: (context, constraints) {
               double screenHeight = constraints.maxHeight;
               double screenWidth = constraints.maxWidth;
-              Future.delayed(Duration.zero, () async {
+              WidgetsBinding.instance!.addPostFrameCallback((_)   {
                 viewController.setPortrait(context);
               });
               return SingleChildScrollView(
