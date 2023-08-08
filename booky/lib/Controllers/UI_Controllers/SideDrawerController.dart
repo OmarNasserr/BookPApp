@@ -1,3 +1,4 @@
+import 'package:booky/Screens/Admin/admin_playgrounds.dart';
 import 'package:booky/Widgets/frquent_used_widgets/CustText.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -8,27 +9,25 @@ import '../ViewController/ViewController.dart';
 
 class SideDrawerController {
   static List<String> tilesText = [
-    'My Orders',
-    'My Whishlist',
-    'Notifications',
-    'Contact us',
+    'My Playgrounds',
+    'My Booking History',
     'About us',
-    'Country & Language',
-    'Loyalty Program',
-    'Blog',
-    'Help & FAQs',
+    // 'Country & Language',
+    // 'Loyalty Program',
+    // 'Blog',
+    // 'Help & FAQs',
   ];
 
   static List<String> icons= [
     'Assets/Icons/drawerBag.svg',
     'Assets/Icons/heart.svg',
     'Assets/Icons/notification.svg',
-    'Assets/Icons/message.svg',
-    'Assets/Icons/about_us.svg',
-    'Assets/Icons/global.svg',
-    'Assets/Icons/gift.svg',
-    'Assets/Icons/document-text.svg',
-    'Assets/Icons/help.svg',
+    // 'Assets/Icons/message.svg',
+    // 'Assets/Icons/about_us.svg',
+    // 'Assets/Icons/global.svg',
+    // 'Assets/Icons/gift.svg',
+    // 'Assets/Icons/document-text.svg',
+    // 'Assets/Icons/help.svg',
   ];
 
   static List<String> notifications=[
@@ -38,7 +37,9 @@ class SideDrawerController {
   ];
 
   static List<Widget> screens=[
-    // ProfileScreen(),
+    AdminPlaygrounds(),
+    AdminPlaygrounds(),
+    AdminPlaygrounds(),
 
   ];
 
@@ -53,7 +54,6 @@ class SideDrawerController {
           viewController: Get.find<ViewController>(),
           iconData: icons[i],
           tileText: tilesText[i],
-          notificationNo: i>=notifications.length?'':notifications[i],
           onPressed: (){
               Get.to(()=>screens[i]);
           },

@@ -1,4 +1,5 @@
 import 'package:booky/Controllers/LocationControllers/CitiesController.dart';
+import 'package:booky/Controllers/PlaygroundController/FilterPlaygroundsController.dart';
 import 'package:booky/Controllers/PlaygroundController/NearestPlaygroundController.dart';
 import 'package:booky/Models/LocationModels/CitiesModel.dart';
 import 'package:coverflow/coverflow.dart';
@@ -40,7 +41,6 @@ class SectionListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         HeadLine(
@@ -55,9 +55,8 @@ class SectionListView extends StatelessWidget {
             height:
                 viewController.getPortrait(screenHeight / 4, screenWidth / 4),
             child: pGround
-                ? alertsAndLoadingControllers.getNearestPlaygroundLoading()
-                    ?  Center(
-                        child: LoadingWidget())
+                ?alertsAndLoadingControllers.getNearestPlaygroundLoading()
+                    ? Center(child: LoadingWidget())
                     : nearestPlaygroundsOrCitiesController
                             .getNearestPlaygroundController()
                             .isEmpty
@@ -86,7 +85,7 @@ class SectionListView extends StatelessWidget {
                                 screenHeight,
                                 screenWidth))
                 : alertsAndLoadingControllers.getCitiesLoading()
-                    ?  Center(child: LoadingWidget())
+                    ? Center(child: LoadingWidget())
                     : nearestPlaygroundsOrCitiesController
                             .getCitiesController()
                             .isEmpty
@@ -122,17 +121,18 @@ class SectionListView extends StatelessWidget {
         ),
         pGround
             ? Obx(() {
-                return ShowMoreButton(
-                    pGround: pGround,
-                    screenWidth: screenWidth,
-                    screenHeight: screenHeight,
-                    viewController: viewController,
-                    playgroundsOrTowns: CardUIBuilderController.getPlaygrounds(
-                        nearestPlaygroundsOrCitiesController
-                            .getNearestPlaygroundController(),
-                        screenHeight,
-                        screenWidth));
-              })
+                    return ShowMoreButton(
+                        pGround: pGround,
+                        screenWidth: screenWidth,
+                        screenHeight: screenHeight,
+                        viewController: viewController,
+                        playgroundsOrTowns:
+                            CardUIBuilderController.getPlaygrounds(
+                                nearestPlaygroundsOrCitiesController
+                                    .getNearestPlaygroundController(),
+                                screenHeight,
+                                screenWidth));
+                  })
             : Obx(() {
                 return ShowMoreButton(
                     pGround: pGround,
