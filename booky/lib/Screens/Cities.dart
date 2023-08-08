@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Controllers/UI_Controllers/CardUI_BuilderController.dart';
 import '../Controllers/ViewController/ViewController.dart';
 import '../Widgets/frquent_used_widgets/CustText.dart';
 import '../Widgets/frquent_used_widgets/HeadLine.dart';
@@ -22,40 +23,7 @@ class Cities extends StatelessWidget {
 
   ViewController viewController = Get.find<ViewController>();
 
-  List<Widget> setPGRow(List<Widget> pGroundCards) {
-    List<Widget> pRows = [];
-    List<Widget> pgTemp = [];
-    int count = 0;
-    for (int i = 0; i < pGroundCards.length; i++) {
-      count++;
-      pgTemp.add(pGroundCards[i]);
-      if (count % viewController.getPortrait(2, 4) == 0) {
-        pRows.add(
-          Container(
-            height: viewController.getPortrait(
-                screenHeight / 3.5, screenHeight / 3.5),
-            child: Row(
-              children: pgTemp,
-            ),
-          ),
-        );
-        pgTemp = [];
-      } else if (pgTemp.isNotEmpty && count == pGroundCards.length) {
-        pRows.add(
-          Container(
-            height: viewController.getPortrait(
-                screenHeight / 3.5, screenHeight / 3.5),
-            child: Center(
-              child: Row(
-                children: pgTemp,
-              ),
-            ),
-          ),
-        );
-      }
-    }
-    return pRows;
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +39,7 @@ class Cities extends StatelessWidget {
             builder: (context, constraints) {
               double screenHeight = constraints.maxHeight;
               double screenWidth = constraints.maxWidth;
-              Future.delayed(Duration.zero, () async {
+              WidgetsBinding.instance!.addPostFrameCallback((_)  {
                 viewController.setPortrait(context);
               });
               return SingleChildScrollView(
@@ -114,7 +82,11 @@ class Cities extends StatelessWidget {
                                     ),
                                   )
                                 ]
-                              : setPGRow(towns),
+                              : CardUIBuilderController.setPlaygroundsRows(
+                              towns,
+                              viewController,
+                              screenHeight,
+                              screenWidth),
                         ),
                       )
                     ],
