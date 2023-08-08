@@ -60,38 +60,59 @@ class CardUIBuilderController {
 
   ///this function receives List<Widget> and rearrange the widgets so every two widgets
   ///are in a row
+  // static List<Widget> setPlaygroundsRows(List<Widget> pGroundCards,
+  //     ViewController viewController, double screenHeight, double screenWidth) {
+  //   List<Widget> pRows = [];
+  //   List<Widget> pgTemp = [];
+  //   int count = 0;
+  //   for (int i = 0; i < pGroundCards.length; i++) {
+  //     count++;
+  //     pgTemp.add(pGroundCards[i]);
+  //     if (count % viewController.getPortrait(2, 4) == 0) {
+  //       pRows.add(
+  //         Container(
+  //           height: viewController.getPortrait(
+  //               screenHeight / 3.5, screenHeight / 3.5),
+  //           child: Row(
+  //             children: pgTemp,
+  //           ),
+  //         ),
+  //       );
+  //       pgTemp = [];
+  //     } else if (pgTemp.isNotEmpty && count == pGroundCards.length) {
+  //       pRows.add(
+  //         Container(
+  //           height: viewController.getPortrait(
+  //               screenHeight / 3.5, screenHeight / 3.5),
+  //           child: Center(
+  //             child: Row(
+  //               children: pgTemp,
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     }
+  //   }
+  //   return pRows;
+  // }
+
   static List<Widget> setPlaygroundsRows(List<Widget> pGroundCards,
       ViewController viewController, double screenHeight, double screenWidth) {
     List<Widget> pRows = [];
-    List<Widget> pgTemp = [];
-    int count = 0;
     for (int i = 0; i < pGroundCards.length; i++) {
-      count++;
-      pgTemp.add(pGroundCards[i]);
-      if (count % viewController.getPortrait(2, 4) == 0) {
-        pRows.add(
-          Container(
-            height: viewController.getPortrait(
-                screenHeight / 3.5, screenHeight / 3.5),
-            child: Row(
-              children: pgTemp,
+      pRows.add(
+        Column(
+          children: [
+            Container(
+              width: screenWidth/1.1,
+              child: pGroundCards[i],
             ),
-          ),
-        );
-        pgTemp = [];
-      } else if (pgTemp.isNotEmpty && count == pGroundCards.length) {
-        pRows.add(
-          Container(
-            height: viewController.getPortrait(
-                screenHeight / 3.5, screenHeight / 3.5),
-            child: Center(
-              child: Row(
-                children: pgTemp,
-              ),
-            ),
-          ),
-        );
-      }
+            SizedBox(
+              height: screenHeight/60,
+            )
+          ],
+        )
+      );
     }
     return pRows;
   }
